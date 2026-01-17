@@ -15,10 +15,10 @@
 ### Database Introspection
 
 - [x] **INTRO-01**: Tool connects to Postgres using provided connection string
-- [ ] **INTRO-02**: Tool retrieves list of all tables in the specified database
-- [ ] **INTRO-03**: Tool retrieves columns for each table (name, type, nullable)
-- [ ] **INTRO-04**: Tool detects primary keys for each table
-- [ ] **INTRO-05**: Tool detects foreign key relationships between tables
+- [x] **INTRO-02**: Tool retrieves list of all tables in the specified database
+- [x] **INTRO-03**: Tool retrieves columns for each table (name, type, nullable)
+- [x] **INTRO-04**: Tool detects primary keys for each table
+- [x] **INTRO-05**: Tool detects foreign key relationships between tables
 
 ### Type Mapping
 
@@ -68,10 +68,10 @@
 | CLI-03 | Phase 1 | Complete |
 | CLI-04 | Phase 1 | Complete |
 | INTRO-01 | Phase 1 | Complete |
-| INTRO-02 | Phase 2 | Pending |
-| INTRO-03 | Phase 2 | Pending |
-| INTRO-04 | Phase 2 | Pending |
-| INTRO-05 | Phase 2 | Pending |
+| INTRO-02 | Phase 2 | Complete |
+| INTRO-03 | Phase 2 | Complete |
+| INTRO-04 | Phase 2 | Complete |
+| INTRO-05 | Phase 2 | Complete |
 | TYPE-01 | Phase 3 | Pending |
 | TYPE-02 | Phase 3 | Pending |
 | TYPE-03 | Phase 3 | Pending |

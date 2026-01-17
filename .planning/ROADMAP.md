@@ -51,7 +51,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 02-01-PLAN.md — Schema introspection: types, tables, columns, keys, and foreign key relationships
+- [x] 02-01-PLAN.md — Schema introspection: types, tables, columns, keys, and foreign key relationships
 
 **Success Criteria:**
 1. User can connect to a database and tool logs discovered tables
@@ -104,10 +104,10 @@ Plans:
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
 | 1 - Foundation + CLI | ✓ Complete | 5 | 100% |
-| 2 - Schema Introspection | Planned | 4 | 0% |
+| 2 - Schema Introspection | ✓ Complete | 4 | 100% |
 | 3 - Type Mapping + Output | Planned | 14 | 0% |
 
-**Total Progress:** 5/23 requirements complete (22%)
+**Total Progress:** 9/23 requirements complete (39%)
 
 ---
 
