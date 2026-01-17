@@ -12,13 +12,20 @@
     "dev": "tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["postgres", "typescript", "zod", "codegen", "schema"],
+  "keywords": [
+    "postgres",
+    "typescript",
+    "zod",
+    "codegen",
+    "schema"
+  ],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
     "commander": "^12.0.0",
-    "pg": "^8.11.0"
+    "pg": "^8.11.0",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
