@@ -17,3 +17,4 @@ export {
   type Relation,
   type SchemaOutput,
 } from './schema-generator.js';
+export { writeSchemaFile, type WriteOptions } from './file-writer.js';
