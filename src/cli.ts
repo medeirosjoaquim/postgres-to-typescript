@@ -1,5 +1,8 @@
 import { Command } from 'commander';
 import { connectToDatabase, disconnectFromDatabase } from './db.js';
+import { introspectDatabase } from './introspect/index.js';
+import { generateSchemas, writeSchemaFile, type TableInfo } from './generator/index.js';
+import type { TableSchema } from './introspect/types.js';
 
 export interface CliOptions {
   connectionString: string;
@@ -28,20 +31,57 @@ export function parseArgs(args: string[]): CliOptions {
   };
 }
 
+/**
+ * Adapt introspection output to generator input format.
+ * Converts TableSchema[] (from introspect) to TableInfo[] (for generator).
+ */
+function adaptToGeneratorInput(tables: TableSchema[]): TableInfo[] {
+  return tables.map(table => ({
+    name: table.tableName,
+    columns: table.columns.map(col => ({
+      name: col.name,
+      type: col.dataType,
+      isNullable: col.isNullable,
+      isPrimaryKey: col.isPrimaryKey,
+      // Note: Enum detection would require additional introspection
+      // For now, we don't mark enums - they'll be treated as their base type
+      isEnum: false,
+      enumValues: undefined,
+    })),
+    primaryKey: table.primaryKey[0], // First column of PK (simplified)
+    foreignKeys: table.foreignKeys.map(fk => ({
+      columnName: fk.columnName,
+      referencedTable: fk.referencedTable,
+      referencedColumn: fk.referencedColumn,
+    })),
+  }));
+}
+
 export async function run(options: CliOptions): Promise<void> {
   console.log(`Connecting to ${options.db}...`);
 
+  const connection = await connectToDatabase(options.connectionString, options.db);
+
   try {
-    const connection = await connectToDatabase(options.connectionString, options.db);
-    console.log('Connection successful! Ready for schema introspection.');
-    console.log(`Output will be written to: ${options.output}`);
-    await disconnectFromDatabase(connection);
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(`Error: ${error.message}`);
-    } else {
-      console.error('Error: An unexpected error occurred');
+    // Introspect database schema
+    console.log('Introspecting database schema...');
+    const schema = await introspectDatabase(connection.client);
+    console.log(`Found ${schema.tables.length} tables`);
+
+    // Adapt and generate schemas
+    console.log('Generating Zod schemas...');
+    const tables = adaptToGeneratorInput(schema.tables);
+    const { schemaCode, schemaNames } = generateSchemas(tables);
+
+    // Write to output file
+    writeSchemaFile(options.output, schemaCode);
+
+    // Success message
+    console.log(`Success! Generated ${schemaNames.length} schemas to ${options.output}`);
+    if (schemaNames.length > 0) {
+      console.log('Schemas:', schemaNames.join(', '));
     }
-    throw error;
+  } finally {
+    await disconnectFromDatabase(connection);
   }
 }
