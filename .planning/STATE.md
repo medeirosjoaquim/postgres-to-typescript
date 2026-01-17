@@ -4,33 +4,33 @@
 
 **Core Value:** Given a Postgres connection, output Zod schemas + TypeScript types that accurately represent the database schema including relations.
 
-**Current Focus:** Phase 3 in progress - Type Mapping + Output
+**Current Focus:** MILESTONE COMPLETE - v1 Core CLI Tool
 
 ## Current Position
 
 **Milestone:** v1 - Core CLI Tool
 **Phase:** 3 of 3 (Type Mapping + Output)
-**Plan:** 2 of ? complete
-**Status:** In progress
-**Last activity:** 2026-01-17 - Completed 03-02-PLAN.md
+**Plan:** 3 of 3 complete
+**Status:** COMPLETE
+**Last activity:** 2026-01-17 - Completed 03-03-PLAN.md
 
 **Progress:**
 ```
 Phase 1: [##########] Foundation + CLI (2/2 plans, 100%)
 Phase 2: [##########] Schema Introspection (1/1 plans, 100%)
-Phase 3: [####......] Type Mapping + Output (2/? plans)
+Phase 3: [##########] Type Mapping + Output (3/3 plans, 100%)
 
-Overall: [#####...............] ~25% (5 plans complete)
+Overall: [####################] 100% (6 plans complete)
 ```
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans Completed | 5 |
+| Plans Completed | 6 |
 | Plans Failed | 0 |
-| Requirements Done | 21/23 (CLI-01-04, INTRO-01-05, TYPE-01-05, OUT-01-08) |
-| Session Count | 6 |
+| Requirements Done | 22/23 (CLI-01-04, INTRO-01-05, TYPE-01-05, OUT-01-09) |
+| Session Count | 7 |
 
 ## Accumulated Context
 
@@ -54,6 +54,8 @@ Overall: [#####...............] ~25% (5 plans complete)
 | Derive belongs-to from FK | user_id column becomes user property (removes _id suffix) | 2026-01-17 |
 | Has-many uses table name | If posts references users, users gets posts array | 2026-01-17 |
 | Topological table sorting | Order tables so referenced appear before referencing | 2026-01-17 |
+| Adapter function for types | Bridge introspection types to generator types cleanly | 2026-01-17 |
+| Zod as runtime dependency | Generated output imports zod, users need it installed | 2026-01-17 |
 
 ### Learnings
 
@@ -65,6 +67,8 @@ Overall: [#####...............] ~25% (5 plans complete)
 - Self-test pattern with `import.meta.url === file://${process.argv[1]}` works for ESM
 - z.lazy() enables forward references in generated Zod schemas
 - Relation direction can be derived from FK direction (A->B means A belongs-to B, B has-many A)
+- writeFileSync with mkdirSync recursive creates parent directories
+- Adapter functions bridge module boundaries while keeping modules decoupled
 
 ### TODOs
 
@@ -75,7 +79,7 @@ Overall: [#####...............] ~25% (5 plans complete)
 - [x] Implement schema introspection (Plan 02-01)
 - [x] Implement type mapping utilities (Plan 03-01)
 - [x] Implement schema generation (Plan 03-02)
-- [ ] Integrate into CLI and output to file
+- [x] Integrate into CLI and output to file
 
 ### Blockers
 
@@ -86,35 +90,34 @@ Overall: [#####...............] ~25% (5 plans complete)
 ### Last Session
 
 **Date:** 2026-01-17
-**Accomplishment:** Completed Plan 03-02: Zod schema code generator with relation detection
-**Stopped At:** Plan 03-02 complete
-**Next Action:** Plan 03-03 - CLI integration and file output
+**Accomplishment:** Completed Plan 03-03: CLI integration and file output - MILESTONE COMPLETE
+**Stopped At:** v1 Core CLI Tool complete
+**Next Action:** Future enhancements (enum detection, config options, tests)
 
 ### Resume Context
 
-Phase 3 Plan 02 complete. Tool can now:
-- Parse command line arguments (--connection-string, --db, --output)
-- Connect to PostgreSQL database using pg Pool
-- Introspect database schema with introspectDatabase()
-- Map Postgres types to Zod types with mapPostgresTypeToZod()
-- Map enums to Zod enums with mapEnumToZod()
-- Transform names with toPascalCase() and toCamelCase()
-- Generate complete Zod schema code with generateSchemas()
-- Detect belongs-to and has-many relations from foreign keys
-- Handle circular references via z.lazy()
+**MILESTONE v1 COMPLETE**
+
+The tool now delivers the full core value:
+```bash
+pg-to-ts --connection-string "postgresql://..." --db mydb --output ./schema.ts
+```
+
+Complete end-to-end flow:
+1. Parse CLI arguments
+2. Connect to PostgreSQL database
+3. Introspect schema (tables, columns, foreign keys)
+4. Generate Zod schemas with TypeScript types
+5. Write output to specified file path
 
 Key files:
-- `src/db.ts` - DatabaseConnection interface, connectToDatabase, disconnectFromDatabase
-- `src/cli.ts` - CLI entry point with argument parsing
-- `src/introspect/types.ts` - ColumnSchema, ForeignKeySchema, TableSchema, DatabaseSchema
-- `src/introspect/introspect.ts` - introspectDatabase() function with SQL queries
-- `src/introspect/index.ts` - Barrel export
-- `src/generator/name-utils.ts` - toPascalCase, toCamelCase
-- `src/generator/type-mapper.ts` - mapPostgresTypeToZod, mapEnumToZod, getZodTypeMapping
-- `src/generator/schema-generator.ts` - generateSchemas() with relation detection
-- `src/generator/index.ts` - Barrel export
+- `src/index.ts` - CLI entry point
+- `src/cli.ts` - CLI parsing and main run() function with full pipeline
+- `src/db.ts` - Database connection utilities
+- `src/introspect/` - Schema introspection module
+- `src/generator/` - Code generation module (type-mapper, name-utils, schema-generator, file-writer)
 
-Commits this session: 0f56c5f (schema-generator interfaces), 052cdd7 (generateSchemas implementation)
+Commits this session: 0d6a1e7 (file-writer), 8fd4eab (CLI integration), a03e0ae (zod dependency)
 
 ---
 *State initialized: 2026-01-17*
