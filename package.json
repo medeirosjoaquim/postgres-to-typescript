@@ -1,0 +1,29 @@
+{
+  "name": "pg-to-ts",
+  "version": "1.0.0",
+  "description": "Generate Zod schemas and TypeScript types from PostgreSQL database",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "pg-to-ts": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["postgres", "typescript", "zod", "codegen", "schema"],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
