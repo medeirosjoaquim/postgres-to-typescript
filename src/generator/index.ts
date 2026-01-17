@@ -9,3 +9,11 @@ export {
   getZodTypeMapping,
   type ZodTypeMapping,
 } from './type-mapper.js';
+export {
+  generateSchemas,
+  type ColumnInfo,
+  type ForeignKey,
+  type TableInfo,
+  type Relation,
+  type SchemaOutput,
+} from './schema-generator.js';
