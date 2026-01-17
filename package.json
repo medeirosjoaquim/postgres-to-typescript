@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Generate Zod schemas and TypeScript types from PostgreSQL database",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "bin/postgres-to-typescript",
   "bin": {
-    "pg-to-ts": "./dist/index.js"
+    "pg-to-ts": "./bin/postgres-to-typescript"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && mv bin/index.js bin/postgres-to-typescript && chmod +x bin/postgres-to-typescript",
     "dev": "tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
