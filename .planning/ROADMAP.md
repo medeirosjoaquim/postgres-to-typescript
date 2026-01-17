@@ -42,6 +42,11 @@ This roadmap delivers the Postgres-to-TypeScript CLI tool in 3 phases: (1) Found
 - INTRO-04: Tool detects primary keys for each table
 - INTRO-05: Tool detects foreign key relationships between tables
 
+**Plans:** 1 plan
+
+Plans:
+- [ ] 02-01-PLAN.md — Schema introspection: types, tables, columns, keys, and foreign key relationships
+
 **Success Criteria:**
 1. User can connect to a database and tool logs discovered tables
 2. Tool correctly identifies all columns with their Postgres types and nullable status
@@ -86,7 +91,7 @@ This roadmap delivers the Postgres-to-TypeScript CLI tool in 3 phases: (1) Found
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
 | 1 - Foundation + CLI | Not Started | 5 | 0% |
-| 2 - Schema Introspection | Not Started | 4 | 0% |
+| 2 - Schema Introspection | Planned | 4 | 0% |
 | 3 - Type Mapping + Output | Not Started | 14 | 0% |
 
 **Total Progress:** 0/23 requirements complete (0%)
