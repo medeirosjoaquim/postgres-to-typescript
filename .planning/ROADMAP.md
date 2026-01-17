@@ -26,8 +26,8 @@ This roadmap delivers the Postgres-to-TypeScript CLI tool in 3 phases: (1) Found
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project setup and CLI argument parsing
-- [ ] 01-02-PLAN.md — Database connection with error handling
+- [x] 01-01-PLAN.md — Project setup and CLI argument parsing
+- [x] 01-02-PLAN.md — Database connection with error handling
 
 **Success Criteria:**
 1. User can run `npx pg-to-ts --help` and see usage documentation
@@ -103,11 +103,11 @@ Plans:
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Foundation + CLI | Planned | 5 | 0% |
+| 1 - Foundation + CLI | ✓ Complete | 5 | 100% |
 | 2 - Schema Introspection | Planned | 4 | 0% |
 | 3 - Type Mapping + Output | Planned | 14 | 0% |
 
-**Total Progress:** 0/23 requirements complete (0%)
+**Total Progress:** 5/23 requirements complete (22%)
 
 ---
 

@@ -7,14 +7,14 @@
 
 ### CLI Interface
 
-- [ ] **CLI-01**: Tool accepts `--connection-string` flag for Postgres URL
-- [ ] **CLI-02**: Tool accepts `--db` flag for database name
-- [ ] **CLI-03**: Tool accepts `--output` flag for output file path
-- [ ] **CLI-04**: Tool shows help/usage text when run with `--help` or invalid args
+- [x] **CLI-01**: Tool accepts `--connection-string` flag for Postgres URL
+- [x] **CLI-02**: Tool accepts `--db` flag for database name
+- [x] **CLI-03**: Tool accepts `--output` flag for output file path
+- [x] **CLI-04**: Tool shows help/usage text when run with `--help` or invalid args
 
 ### Database Introspection
 
-- [ ] **INTRO-01**: Tool connects to Postgres using provided connection string
+- [x] **INTRO-01**: Tool connects to Postgres using provided connection string
 - [ ] **INTRO-02**: Tool retrieves list of all tables in the specified database
 - [ ] **INTRO-03**: Tool retrieves columns for each table (name, type, nullable)
 - [ ] **INTRO-04**: Tool detects primary keys for each table
@@ -63,11 +63,11 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLI-01 | Phase 1 | Pending |
-| CLI-02 | Phase 1 | Pending |
-| CLI-03 | Phase 1 | Pending |
-| CLI-04 | Phase 1 | Pending |
-| INTRO-01 | Phase 1 | Pending |
+| CLI-01 | Phase 1 | Complete |
+| CLI-02 | Phase 1 | Complete |
+| CLI-03 | Phase 1 | Complete |
+| CLI-04 | Phase 1 | Complete |
+| INTRO-01 | Phase 1 | Complete |
 | INTRO-02 | Phase 2 | Pending |
 | INTRO-03 | Phase 2 | Pending |
 | INTRO-04 | Phase 2 | Pending |
