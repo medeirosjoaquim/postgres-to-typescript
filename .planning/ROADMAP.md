@@ -83,6 +83,13 @@ Plans:
 - OUT-08: Circular references handled correctly with `z.lazy()`
 - OUT-09: Tool writes output to specified file path
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Type mapper and name transformation utilities
+- [ ] 03-02-PLAN.md — Zod schema code generator with relation handling
+- [ ] 03-03-PLAN.md — File writer and CLI integration
+
 **Success Criteria:**
 1. User runs tool against a database and receives a valid TypeScript file at the specified output path
 2. Generated file compiles with `tsc` without errors
@@ -98,7 +105,7 @@ Plans:
 |-------|--------|--------------|------------|
 | 1 - Foundation + CLI | Planned | 5 | 0% |
 | 2 - Schema Introspection | Planned | 4 | 0% |
-| 3 - Type Mapping + Output | Not Started | 14 | 0% |
+| 3 - Type Mapping + Output | Planned | 14 | 0% |
 
 **Total Progress:** 0/23 requirements complete (0%)
 
