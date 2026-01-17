@@ -62,11 +62,34 @@ async function getPrimaryKey(client: PoolClient, tableName: string): Promise<str
 
 /**
  * Get foreign keys for a specific table.
- * Note: This will be implemented in Task 3, returning empty array for now.
+ * Handles: tables with no FKs, multiple FKs, self-referential FKs, composite FKs.
  */
 async function getForeignKeys(client: PoolClient, tableName: string): Promise<ForeignKeySchema[]> {
-  // Placeholder - will be implemented in Task 3
-  return [];
+  const result = await client.query<{
+    constraint_name: string;
+    column_name: string;
+    referenced_table: string;
+    referenced_column: string;
+  }>(`
+    SELECT
+      c.conname as constraint_name,
+      a.attname as column_name,
+      ref_cl.relname as referenced_table,
+      ref_a.attname as referenced_column
+    FROM pg_constraint c
+    JOIN pg_attribute a ON a.attrelid = c.conrelid AND a.attnum = ANY(c.conkey)
+    JOIN pg_class ref_cl ON ref_cl.oid = c.confrelid
+    JOIN pg_attribute ref_a ON ref_a.attrelid = c.confrelid AND ref_a.attnum = ANY(c.confkey)
+    WHERE c.contype = 'f'
+      AND c.conrelid = $1::regclass
+  `, [tableName]);
+
+  return result.rows.map(row => ({
+    constraintName: row.constraint_name,
+    columnName: row.column_name,
+    referencedTable: row.referenced_table,
+    referencedColumn: row.referenced_column,
+  }));
 }
 
 /**
