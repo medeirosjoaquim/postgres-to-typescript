@@ -63,35 +63,35 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLI-01 | TBD | Pending |
-| CLI-02 | TBD | Pending |
-| CLI-03 | TBD | Pending |
-| CLI-04 | TBD | Pending |
-| INTRO-01 | TBD | Pending |
-| INTRO-02 | TBD | Pending |
-| INTRO-03 | TBD | Pending |
-| INTRO-04 | TBD | Pending |
-| INTRO-05 | TBD | Pending |
-| TYPE-01 | TBD | Pending |
-| TYPE-02 | TBD | Pending |
-| TYPE-03 | TBD | Pending |
-| TYPE-04 | TBD | Pending |
-| TYPE-05 | TBD | Pending |
-| OUT-01 | TBD | Pending |
-| OUT-02 | TBD | Pending |
-| OUT-03 | TBD | Pending |
-| OUT-04 | TBD | Pending |
-| OUT-05 | TBD | Pending |
-| OUT-06 | TBD | Pending |
-| OUT-07 | TBD | Pending |
-| OUT-08 | TBD | Pending |
-| OUT-09 | TBD | Pending |
+| CLI-01 | Phase 1 | Pending |
+| CLI-02 | Phase 1 | Pending |
+| CLI-03 | Phase 1 | Pending |
+| CLI-04 | Phase 1 | Pending |
+| INTRO-01 | Phase 1 | Pending |
+| INTRO-02 | Phase 2 | Pending |
+| INTRO-03 | Phase 2 | Pending |
+| INTRO-04 | Phase 2 | Pending |
+| INTRO-05 | Phase 2 | Pending |
+| TYPE-01 | Phase 3 | Pending |
+| TYPE-02 | Phase 3 | Pending |
+| TYPE-03 | Phase 3 | Pending |
+| TYPE-04 | Phase 3 | Pending |
+| TYPE-05 | Phase 3 | Pending |
+| OUT-01 | Phase 3 | Pending |
+| OUT-02 | Phase 3 | Pending |
+| OUT-03 | Phase 3 | Pending |
+| OUT-04 | Phase 3 | Pending |
+| OUT-05 | Phase 3 | Pending |
+| OUT-06 | Phase 3 | Pending |
+| OUT-07 | Phase 3 | Pending |
+| OUT-08 | Phase 3 | Pending |
+| OUT-09 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 23 total
-- Mapped to phases: 0
-- Unmapped: 23
+- Mapped to phases: 23
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after initial definition*
+*Last updated: 2026-01-17 after roadmap creation - all requirements mapped to phases*
