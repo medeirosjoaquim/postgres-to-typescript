@@ -52,9 +52,12 @@ async function getPrimaryKey(client: PoolClient, tableName: string): Promise<str
   const result = await client.query<{ column_name: string }>(`
     SELECT a.attname as column_name
     FROM pg_constraint c
+    JOIN pg_class cl ON cl.oid = c.conrelid
+    JOIN pg_namespace n ON n.oid = cl.relnamespace
     JOIN pg_attribute a ON a.attrelid = c.conrelid AND a.attnum = ANY(c.conkey)
     WHERE c.contype = 'p'
-      AND c.conrelid = $1::regclass
+      AND n.nspname = 'public'
+      AND cl.relname = $1
   `, [tableName]);
 
   return result.rows.map(row => row.column_name);
@@ -77,11 +80,14 @@ async function getForeignKeys(client: PoolClient, tableName: string): Promise<Fo
       ref_cl.relname as referenced_table,
       ref_a.attname as referenced_column
     FROM pg_constraint c
+    JOIN pg_class cl ON cl.oid = c.conrelid
+    JOIN pg_namespace n ON n.oid = cl.relnamespace
     JOIN pg_attribute a ON a.attrelid = c.conrelid AND a.attnum = ANY(c.conkey)
     JOIN pg_class ref_cl ON ref_cl.oid = c.confrelid
     JOIN pg_attribute ref_a ON ref_a.attrelid = c.confrelid AND ref_a.attnum = ANY(c.confkey)
     WHERE c.contype = 'f'
-      AND c.conrelid = $1::regclass
+      AND n.nspname = 'public'
+      AND cl.relname = $1
   `, [tableName]);
 
   return result.rows.map(row => ({
