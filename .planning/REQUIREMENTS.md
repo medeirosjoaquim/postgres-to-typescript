@@ -22,23 +22,23 @@
 
 ### Type Mapping
 
-- [ ] **TYPE-01**: Tool maps common Postgres types (text, varchar, int, bigint, boolean, timestamp, date) to Zod types
-- [ ] **TYPE-02**: Tool maps JSON/JSONB columns to appropriate Zod type
-- [ ] **TYPE-03**: Tool maps Postgres array columns (e.g., text[]) to Zod arrays
-- [ ] **TYPE-04**: Tool maps custom Postgres enums to Zod enums
-- [ ] **TYPE-05**: Tool handles nullable columns as `.nullable().optional()`
+- [x] **TYPE-01**: Tool maps common Postgres types (text, varchar, int, bigint, boolean, timestamp, date) to Zod types
+- [x] **TYPE-02**: Tool maps JSON/JSONB columns to appropriate Zod type
+- [x] **TYPE-03**: Tool maps Postgres array columns (e.g., text[]) to Zod arrays
+- [x] **TYPE-04**: Tool maps custom Postgres enums to Zod enums
+- [x] **TYPE-05**: Tool handles nullable columns as `.nullable().optional()`
 
 ### Output Generation
 
-- [ ] **OUT-01**: Tool generates Zod schema for each table
-- [ ] **OUT-02**: Tool generates TypeScript type via `z.infer<typeof Schema>`
-- [ ] **OUT-03**: Schema names are PascalCase (e.g., `UserPost` from `user_posts`)
-- [ ] **OUT-04**: Each schema has JSDoc comment with original table name
-- [ ] **OUT-05**: Property names are camelCase (e.g., `createdAt` from `created_at`)
-- [ ] **OUT-06**: Has-many relations represented as `z.lazy(() => Schema).array().optional()`
-- [ ] **OUT-07**: Belongs-to relations represented as `z.lazy(() => Schema).optional()`
-- [ ] **OUT-08**: Circular references handled correctly with `z.lazy()`
-- [ ] **OUT-09**: Tool writes output to specified file path
+- [x] **OUT-01**: Tool generates Zod schema for each table
+- [x] **OUT-02**: Tool generates TypeScript type via `z.infer<typeof Schema>`
+- [x] **OUT-03**: Schema names are PascalCase (e.g., `UserPost` from `user_posts`)
+- [x] **OUT-04**: Each schema has JSDoc comment with original table name
+- [x] **OUT-05**: Property names are camelCase (e.g., `createdAt` from `created_at`)
+- [x] **OUT-06**: Has-many relations represented as `z.lazy(() => Schema).array().optional()`
+- [x] **OUT-07**: Belongs-to relations represented as `z.lazy(() => Schema).optional()`
+- [x] **OUT-08**: Circular references handled correctly with `z.lazy()`
+- [x] **OUT-09**: Tool writes output to specified file path
 
 ## v2 Requirements
 
@@ -72,20 +72,20 @@
 | INTRO-03 | Phase 2 | Complete |
 | INTRO-04 | Phase 2 | Complete |
 | INTRO-05 | Phase 2 | Complete |
-| TYPE-01 | Phase 3 | Pending |
-| TYPE-02 | Phase 3 | Pending |
-| TYPE-03 | Phase 3 | Pending |
-| TYPE-04 | Phase 3 | Pending |
-| TYPE-05 | Phase 3 | Pending |
-| OUT-01 | Phase 3 | Pending |
-| OUT-02 | Phase 3 | Pending |
-| OUT-03 | Phase 3 | Pending |
-| OUT-04 | Phase 3 | Pending |
-| OUT-05 | Phase 3 | Pending |
-| OUT-06 | Phase 3 | Pending |
-| OUT-07 | Phase 3 | Pending |
-| OUT-08 | Phase 3 | Pending |
-| OUT-09 | Phase 3 | Pending |
+| TYPE-01 | Phase 3 | Complete |
+| TYPE-02 | Phase 3 | Complete |
+| TYPE-03 | Phase 3 | Complete |
+| TYPE-04 | Phase 3 | Complete |
+| TYPE-05 | Phase 3 | Complete |
+| OUT-01 | Phase 3 | Complete |
+| OUT-02 | Phase 3 | Complete |
+| OUT-03 | Phase 3 | Complete |
+| OUT-04 | Phase 3 | Complete |
+| OUT-05 | Phase 3 | Complete |
+| OUT-06 | Phase 3 | Complete |
+| OUT-07 | Phase 3 | Complete |
+| OUT-08 | Phase 3 | Complete |
+| OUT-09 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 23 total
