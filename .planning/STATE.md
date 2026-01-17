@@ -4,33 +4,33 @@
 
 **Core Value:** Given a Postgres connection, output Zod schemas + TypeScript types that accurately represent the database schema including relations.
 
-**Current Focus:** Phase 2 in progress - Schema Introspection
+**Current Focus:** Phase 3 in progress - Type Mapping + Output
 
 ## Current Position
 
 **Milestone:** v1 - Core CLI Tool
-**Phase:** 2 of 3 (Schema Introspection)
+**Phase:** 3 of 3 (Type Mapping + Output)
 **Plan:** 1 of ? complete
 **Status:** In progress
-**Last activity:** 2026-01-17 - Completed 02-01-PLAN.md
+**Last activity:** 2026-01-17 - Completed 03-01-PLAN.md
 
 **Progress:**
 ```
 Phase 1: [##########] Foundation + CLI (2/2 plans, 100%)
-Phase 2: [##........] Schema Introspection (1/? plans)
-Phase 3: [..........] Type Mapping + Output (0/? plans)
+Phase 2: [##########] Schema Introspection (1/1 plans, 100%)
+Phase 3: [##........] Type Mapping + Output (1/? plans)
 
-Overall: [###.................] ~15% (3 plans complete)
+Overall: [####................] ~20% (4 plans complete)
 ```
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans Completed | 3 |
+| Plans Completed | 4 |
 | Plans Failed | 0 |
-| Requirements Done | 9/23 (CLI-01, CLI-02, CLI-03, CLI-04, INTRO-01, INTRO-02, INTRO-03, INTRO-04, INTRO-05) |
-| Session Count | 4 |
+| Requirements Done | 16/23 (CLI-01-04, INTRO-01-05, TYPE-01-05, OUT-03, OUT-05) |
+| Session Count | 5 |
 
 ## Accumulated Context
 
@@ -46,6 +46,10 @@ Overall: [###.................] ~15% (3 plans complete)
 | pg Pool for connection | Industry standard, handles connection pooling | 2026-01-17 |
 | Specific error messages | ECONNREFUSED, ENOTFOUND, auth - helps user diagnose | 2026-01-17 |
 | udt_name for types | Precise Postgres types (int4, _text) vs generic (integer, ARRAY) | 2026-01-17 |
+| z.coerce.date() for timestamps | Handles both string and Date inputs flexibly | 2026-01-17 |
+| z.bigint() for bigint/int8 | JavaScript bigint for large integers | 2026-01-17 |
+| z.unknown() fallback | Safe fallback for JSON types and unrecognized Postgres types | 2026-01-17 |
+| .nullable().optional() chain | Standard Zod pattern for nullable database columns | 2026-01-17 |
 
 ### Learnings
 
@@ -53,6 +57,8 @@ Overall: [###.................] ~15% (3 plans complete)
 - pg error codes can be checked via `(error as any).code` for ECONNREFUSED, ENOTFOUND
 - information_schema.columns gives udt_name for precise Postgres type names
 - pg_constraint contype='p' for primary keys, contype='f' for foreign keys
+- Postgres arrays can be `text[]` (SQL) or `_text` (internal) notation
+- Self-test pattern with `import.meta.url === file://${process.argv[1]}` works for ESM
 
 ### TODOs
 
@@ -61,8 +67,9 @@ Overall: [###.................] ~15% (3 plans complete)
 - [x] Implement CLI argument parsing
 - [x] Implement database connection (Plan 02)
 - [x] Implement schema introspection (Plan 02-01)
-- [ ] Integrate introspection into CLI
-- [ ] Plan Phase 3: Type Mapping + Output
+- [x] Implement type mapping utilities (Plan 03-01)
+- [ ] Implement schema generation (Plan 03-02)
+- [ ] Integrate into CLI and output to file
 
 ### Blockers
 
@@ -73,20 +80,19 @@ Overall: [###.................] ~15% (3 plans complete)
 ### Last Session
 
 **Date:** 2026-01-17
-**Accomplishment:** Completed Plan 02-01: Schema introspection with tables, columns, primary keys, foreign keys
-**Stopped At:** Plan 02-01 complete
-**Next Action:** Additional introspection plans or Phase 3 planning
+**Accomplishment:** Completed Plan 03-01: Type mapping and name transformation utilities
+**Stopped At:** Plan 03-01 complete
+**Next Action:** Plan 03-02 - Schema generation using type mapping
 
 ### Resume Context
 
-Phase 2 Plan 01 complete. Tool can now:
+Phase 3 Plan 01 complete. Tool can now:
 - Parse command line arguments (--connection-string, --db, --output)
 - Connect to PostgreSQL database using pg Pool
 - Introspect database schema with introspectDatabase()
-- Retrieve all tables from public schema
-- Retrieve columns with name, dataType, isNullable, defaultValue
-- Detect primary keys for each table
-- Detect foreign key relationships between tables
+- Map Postgres types to Zod types with mapPostgresTypeToZod()
+- Map enums to Zod enums with mapEnumToZod()
+- Transform names with toPascalCase() and toCamelCase()
 
 Key files:
 - `src/db.ts` - DatabaseConnection interface, connectToDatabase, disconnectFromDatabase
@@ -94,8 +100,11 @@ Key files:
 - `src/introspect/types.ts` - ColumnSchema, ForeignKeySchema, TableSchema, DatabaseSchema
 - `src/introspect/introspect.ts` - introspectDatabase() function with SQL queries
 - `src/introspect/index.ts` - Barrel export
+- `src/generator/name-utils.ts` - toPascalCase, toCamelCase
+- `src/generator/type-mapper.ts` - mapPostgresTypeToZod, mapEnumToZod, getZodTypeMapping
+- `src/generator/index.ts` - Barrel export
 
-Commits this session: 5fbdbaf (types), 1aa87d8 (tables/columns/pk), 945656f (foreign keys)
+Commits this session: 9cc54cc (name-utils), 0e3876d (type-mapper), 3a30eef (generator index)
 
 ---
 *State initialized: 2026-01-17*
