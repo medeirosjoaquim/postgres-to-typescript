@@ -1,6 +1,38 @@
-/target
-.env
+# Dependencies
 node_modules/
-dist/
-*.log
 
+# Build output (tsconfig outDir)
+bin/**/*.js
+bin/**/*.d.ts
+bin/**/*.js.map
+bin/**/*.d.ts.map
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Generated output files (user-generated types)
+lumimed-types.ts
+
+# pnpm store
+.pnpm-store/
