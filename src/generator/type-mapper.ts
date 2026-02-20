@@ -153,10 +153,12 @@ export function mapPostgresTypeToZod(pgType: string, isNullable: boolean): strin
   let baseType: string;
   if (isArray) {
     const elementType = extractArrayBaseType(normalizedType);
-    const zodElementType = POSTGRES_TO_ZOD_MAP[elementType] ?? 'z.unknown()';
+    // Unknown array element types (likely custom enums) treated as strings
+    const zodElementType = POSTGRES_TO_ZOD_MAP[elementType] ?? 'z.string()';
     baseType = `z.array(${zodElementType})`;
   } else {
-    baseType = POSTGRES_TO_ZOD_MAP[normalizedType] ?? 'z.unknown()';
+    // Unknown types (likely custom enums) treated as strings for compatibility
+    baseType = POSTGRES_TO_ZOD_MAP[normalizedType] ?? 'z.string()';
   }
 
   if (isNullable) {
@@ -240,10 +242,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     'text[] nullable -> z.array(z.string()).nullable().optional()'
   );
 
-  // Unknown types fallback
+  // Unknown types fallback (custom enums treated as strings)
   console.assert(
-    mapPostgresTypeToZod('some_custom_type', false) === 'z.unknown()',
-    'unknown type -> z.unknown()'
+    mapPostgresTypeToZod('some_custom_type', false) === 'z.string()',
+    'unknown type -> z.string()'
   );
 
   // Enum mapping
