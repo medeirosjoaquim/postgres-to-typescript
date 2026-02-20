@@ -9,7 +9,15 @@ export async function connectToDatabase(
   connectionString: string,
   database: string
 ): Promise<DatabaseConnection> {
-  const pool = new Pool({ connectionString });
+  // Parse connection string and ensure database is set
+  const url = new URL(connectionString);
+  url.pathname = `/${database}`;
+  const finalConnectionString = url.toString();
+
+  const pool = new Pool({
+    connectionString: finalConnectionString,
+    ssl: { rejectUnauthorized: false }
+  });
 
   try {
     const client = await pool.connect();

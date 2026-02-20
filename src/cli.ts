@@ -34,6 +34,7 @@ export function parseArgs(args: string[]): CliOptions {
 /**
  * Adapt introspection output to generator input format.
  * Converts TableSchema[] (from introspect) to TableInfo[] (for generator).
+ * Now supports composite primary keys, composite foreign keys, and PostgreSQL enums.
  */
 function adaptToGeneratorInput(tables: TableSchema[]): TableInfo[] {
   return tables.map(table => ({
@@ -43,16 +44,14 @@ function adaptToGeneratorInput(tables: TableSchema[]): TableInfo[] {
       type: col.dataType,
       isNullable: col.isNullable,
       isPrimaryKey: col.isPrimaryKey,
-      // Note: Enum detection would require additional introspection
-      // For now, we don't mark enums - they'll be treated as their base type
-      isEnum: false,
-      enumValues: undefined,
+      isEnum: col.isEnum,
+      enumValues: col.enumValues ?? undefined,
     })),
-    primaryKey: table.primaryKey[0], // First column of PK (simplified)
+    primaryKey: table.primaryKey, // Full composite PK support
     foreignKeys: table.foreignKeys.map(fk => ({
-      columnName: fk.columnName,
+      columnNames: fk.columnNames,
       referencedTable: fk.referencedTable,
-      referencedColumn: fk.referencedColumn,
+      referencedColumns: fk.referencedColumns,
     })),
   }));
 }
