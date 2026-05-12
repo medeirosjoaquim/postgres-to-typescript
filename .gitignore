@@ -36,3 +36,6 @@ lumimed-types.ts
 
 # pnpm store
 .pnpm-store/
+
+# Task tracking
+TODO.md
