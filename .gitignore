@@ -2,10 +2,10 @@
 node_modules/
 
 # Build output (tsconfig outDir)
-bin/**/*.js
-bin/**/*.d.ts
-bin/**/*.js.map
-bin/**/*.d.ts.map
+bin/
+
+# Planning docs
+.planning/
 
 # Environment
 .env
